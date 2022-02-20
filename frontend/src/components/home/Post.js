@@ -46,6 +46,7 @@ const Post = ({Name,Caption,likes,img,post_id,user_id,friend_id,likedPeople,crea
         .catch(err=>console.log(err))
     }
     // console.log(likeCount)
+    // let F="http://localhost:8000/images/"
     return (
         <div className="postbox mx-2 my-4 py-2">
         <div className="uname"><h5><i className="far fa-user-circle"></i><Link className="name_link" to={`/profile/${user_id}`}> {Name}</Link> </h5></div>

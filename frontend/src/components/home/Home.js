@@ -4,8 +4,8 @@ import React from 'react'
 import "./Home.css"
 import Post from './Post'
 import {useEffect,useState,useContext} from "react"
-import AddPost from './AddPost'
-
+// import AddPost from './AddPost'
+import AddPost1 from './AddPost1'
 import {UserContext} from "../../UserContext"
 import { userRequest } from '../../axios'
 // import ProfilePic from '../Profile/ProfilePic'
@@ -64,7 +64,7 @@ useEffect(() => {
         
    
 
-   <div className="fixed-bottom  col-md-12 col-lg-3 border border-warning p-3 addpost-form bg-dark"><button onClick={()=>setDis(!dis)} className="btn btn-warning m-2 ">+</button> {dis?<AddPost posts={posts} setPosts={setPosts} user={user}/>:<></>} </div>
+   <div className="fixed-bottom  col-md-12 col-lg-3 border border-warning p-3 addpost-form bg-dark"><button onClick={()=>setDis(!dis)} className="btn btn-warning m-2 ">+</button> {dis?<AddPost1 posts={posts} setPosts={setPosts} user={user}/>:<></>} </div>
            
 
            {/* <Link to="/comments"> <button  className="btn btn-warning mt-2 ">comments</button> </Link> */}

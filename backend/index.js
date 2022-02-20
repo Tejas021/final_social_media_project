@@ -6,6 +6,8 @@ const cookieParser = require('cookie-parser');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const dotenv = require("dotenv").config()
+const multer = require("multer")
+const path = require("path")
 //DATABASE VARIABLE
 const mongodb = process.env.MONGODB_URL
 
@@ -20,7 +22,7 @@ let PORT =process.env.PORT||8000
 // })}) 
 
 
-
+app.use("/images",express.static(path.join(__dirname,"/images")))
 
 
 
@@ -28,7 +30,7 @@ let PORT =process.env.PORT||8000
 
 //MIDDLEWARE
 var corsOptions = {
-    origin: 'http://localhost:3000',
+    origin: ['http://localhost:3000',""],
     credentials: true,
     optionsSuccessStatus: 200 // For legacy browser support
 }
@@ -109,7 +111,26 @@ const roomRoutes = require('./routes/roomRoutes')
 const eventRoutes = require('./routes/eventRoutes')
 
 
+//FILE UPLOAD
 
+
+const storage= multer.diskStorage({
+  destination:function(req,file,cb){
+    cb(null,"images")
+  },
+  filename:function(req,file,cb){
+    // console.log(req.body.name)
+    // const uniqueSuffix=Date.now()+"-"+Math.round(Math.random()*1E9);
+    cb(null,req.body.name)
+  }
+})
+
+const upload= multer({storage:storage});
+
+app.post("/api/upload",upload.single("file"),(req,res)=>{
+ 
+  res.status(200).send(req.file.filename)
+})
 
 //TESTING COOKIES
 app.get("/set-cookies",(req,res)=>{
